@@ -1,0 +1,12 @@
+---
+memory: 512M
+buildpack: go_buildpack
+domain: <your-domain>
+command: pcf-metrics-trace-example-golang
+env:
+  TARGET_APP: trace-example-go
+  TARGET_DOMAIN: <your-domain>
+
+applications:
+  - name: trace-example-go-proxy
+  - name: trace-example-go
