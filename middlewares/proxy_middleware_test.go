@@ -28,7 +28,7 @@ var _ = Describe("Proxy Middleware", func() {
 		mockDestServer = httptest.NewServer(destHandler)
 
 		destUrl := mockDestServer.URL
-		mockProxyServer = httptest.NewServer(middlewares.NewProxyMiddleware("dest", destUrl[7], nextHandler))
+		mockProxyServer = httptest.NewServer(middlewares.NewProxyMiddleware("dest", destUrl[7:len(destUrl)], nextHandler))
 
 		req, err := http.NewRequest("GET", mockProxyServer.URL, nil)
 		Expect(err).ToNot(HaveOccurred())
