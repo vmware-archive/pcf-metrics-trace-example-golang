@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	. "github.com/pivotal-cf/pcf-metrics-trace-example-golang/middlewares"
+	"github.com/pivotal-cf/pcf-metrics-trace-example-golang/middlewares"
 	. "github.com/pivotal-cf/pcf-metrics-trace-example-golang/orders/handlers"
 	"github.com/tedsuo/rata"
 )
@@ -15,7 +15,7 @@ func main() {
 	}
 
 	routeHandlers := rata.Handlers{
-		"ProcessOrder": NewProxyMiddleware("charge-card", os.Getenv("PAYMENTS_HOST"), NewOrdersHandler()),
+		"ProcessOrder": middlewares.NewProxyMiddleware("charge-card", os.Getenv("PAYMENTS_HOST"), NewOrdersHandler()),
 	}
 
 	router, err := rata.NewRouter(routes, routeHandlers)

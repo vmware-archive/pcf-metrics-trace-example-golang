@@ -1,8 +1,12 @@
-hash: 8e23ef757e8d51b520b55cc6fdb50e6db7b4086e97126e30ef858dde54ef40aa
-updated: 2017-02-06T18:49:47.248461448-08:00
+hash: ecedcc3bb895c6c588a3669eebf7dbe3bd7f8f51ce977bce47c1444edee10a4e
+updated: 2017-02-06T20:32:39.517509882-08:00
 imports:
 - name: github.com/bmizerany/pat
   version: c068ca2f0aacee5ac3681d68e4d0a003b7d1fd2c
+- name: github.com/pivotal-cf/pcf-metrics-trace-example-golang
+  version: 3f4b6f1ee3853ff88729f08499983bcdb653e943
+  subpackages:
+  - middlewares
 - name: github.com/tedsuo/rata
   version: 0649c23705dfb45a9693b668c4fc1c0666f485d9
 testImports: []
