@@ -1,0 +1,8 @@
+hash: 6f1f1f8216a4bc48213216c77699854ada0f484b3814ed638fe9620972fdbc40
+updated: 2017-02-06T18:45:16.006407425-08:00
+imports:
+- name: github.com/bmizerany/pat
+  version: c068ca2f0aacee5ac3681d68e4d0a003b7d1fd2c
+- name: github.com/tedsuo/rata
+  version: 0649c23705dfb45a9693b668c4fc1c0666f485d9
+testImports: []

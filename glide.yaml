@@ -1,4 +1,0 @@
-package: github.com/pivotal-cf/pcf-metrics-trace-example-golang
-import:
-- package: github.com/tedsuo/rata
-  version: ^1.0.0
