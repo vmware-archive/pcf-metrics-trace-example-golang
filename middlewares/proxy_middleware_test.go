@@ -15,20 +15,20 @@ var _ = Describe("Proxy Middleware", func() {
 	var (
 		traceId         = "abc123"
 		spanId          = "def123"
-		proxyHandler    mockHandler
+		nextHandler    mockHandler
 		destHandler     mockHandler
 		mockProxyServer *httptest.Server
 		mockDestServer  *httptest.Server
 	)
 
 	BeforeEach(func() {
-		proxyHandler = newMockHandler()
+		nextHandler = newMockHandler()
 
 		destHandler = newMockHandler()
 		mockDestServer = httptest.NewServer(destHandler)
 
 		destUrl := mockDestServer.URL
-		mockProxyServer = httptest.NewServer(middlewares.NewProxyMiddleware("dest", destUrl[7:len(destUrl)], proxyHandler))
+		mockProxyServer = httptest.NewServer(middlewares.NewProxyMiddleware("dest", destUrl[7], nextHandler))
 
 		req, err := http.NewRequest("GET", mockProxyServer.URL, nil)
 		Expect(err).ToNot(HaveOccurred())
@@ -49,13 +49,17 @@ var _ = Describe("Proxy Middleware", func() {
 	})
 
 	It("requests destination", func() {
-		Expect(destHandler.requests).To(HaveLen(1))
+		Eventually(destHandler.requests).Should(HaveLen(1))
+
 		Eventually(destHandler.traceId).Should(HaveLen(1))
+		Eventually(destHandler.traceId).Should(Receive(&traceId))
+
 		Eventually(destHandler.spanId).Should(HaveLen(1))
+		Eventually(destHandler.spanId).Should(Receive(&spanId))
 	})
 
 	It("calles next handler", func() {
-		Eventually(proxyHandler.requests).Should(HaveLen(1))
+		Eventually(nextHandler.requests).Should(HaveLen(1))
 	})
 })
 
