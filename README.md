@@ -7,7 +7,7 @@ These apps use custom middleware that carries `X-B3-TraceId` and `X-B3-SpanId` h
 
 ## Creating your own tracer apps
 
-To add tracing the following is neccesary:
+To add tracing the following is necessary:
 
 - Every subsequent request should have `X-B3-TraceId` and `X-B3-SpanId` headers with the values from the current request headers (see `/middlewares/proxy_middleware`)
 
