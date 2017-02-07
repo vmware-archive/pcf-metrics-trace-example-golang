@@ -3,7 +3,7 @@
 # PCF Metrics Go Tracer Example
 
 This is a Go repository with three apps: shopping-cart, orders, and payments.
-These apps use custom middleware that carries `X-B3-TraceId` and `X-B3-SpanId` headers CF router injects to trace the calls between them. The traces can then be viewed in PCF-Metrics.
+These apps use custom middleware that carries `X-B3-TraceId` and `X-B3-SpanId` headers that the CF router injects to trace the calls between them. The traces can then be viewed in PCF-Metrics.
 
 ## Creating your own tracer apps
 
