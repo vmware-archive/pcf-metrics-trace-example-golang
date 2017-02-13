@@ -12,6 +12,10 @@ PAYMENTS_APP_NAME="payments-$SUFFIX"
 ORDERS_APP_NAME="orders-$SUFFIX"
 SHOPPING_CART_APP_NAME="shopping-cart-$SUFFIX"
 
+# payments
+GOOS=linux go build -o ./payments-build ./payments
+cf push $PAYMENTS_APP_NAME -m 512M --no-manifest -b binary_buildpack -c ./payments-build
+
 # orders
 GOOS=linux go build -o ./orders-build ./orders
 PAYMENTS_HOST=$(cf app $PAYMENTS_APP_NAME | grep urls | awk '{print $2}')
@@ -19,10 +23,6 @@ cf push $ORDERS_APP_NAME -m 512M --no-manifest --no-start -b binary_buildpack -c
 
 cf set-env $ORDERS_APP_NAME PAYMENTS_HOST $PAYMENTS_HOST
 cf start $ORDERS_APP_NAME
-
-# payments
-GOOS=linux go build -o ./payments-build ./payments
-cf push $PAYMENTS_APP_NAME -m 512M --no-manifest -b binary_buildpack -c ./payments-build
 
 # shopping cart
 GOOS=linux go build -o ./shopping-cart-build ./shopping_cart
