@@ -14,11 +14,12 @@ To add tracing the following is necessary:
 ## Using the example apps
 
 ### SET UP
+Make sure GOPATH is set up. (e.g. `export GOPATH=$HOME/go`)
+
 `go get github.com/pivotal-cf/pcf-metrics-trace-example-golang`
 
 ### DEPLOY
-To use the script, you must login as a user that has the ability to assign space permissions and make spaces.
-It will create a given shopping-cart, orders, and payments app that can be used to preview an example trace.
+To use the script, you must login as a user that has the ability to assign space permissions and make spaces. It will create a shopping-cart, orders, and payments app that can be used to preview an example trace. You will also need to set the `SUFFIX` environment variable to a unique identifier for your tracer applications.
 
 ```
 cd $GOPATH/src/github.com/pivotal-cf/pcf-metrics-trace-example-golang
