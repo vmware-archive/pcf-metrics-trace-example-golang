@@ -21,17 +21,11 @@ Make sure GOPATH is set up. (e.g. `export GOPATH=$HOME/go`)
 ### DEPLOY
 To use the script, you must login as a user that has the ability to assign space permissions and make spaces. It will create a shopping-cart, orders, and payments app that can be used to preview an example trace. You will also need to set the `SUFFIX` environment variable to a unique identifier for your tracer applications.
 
-```
-cd $GOPATH/src/github.com/pivotal-cf/pcf-metrics-trace-example-golang
-./scripts/deploy.sh
-```
-
-Set the `SUFFIX` ENV var to a unique identifier for your tracer applications.
-
 #### For example
 ```
 cf login
-SUFFIX=test ./scripts/deploy.sh
+cd $GOPATH/src/github.com/pivotal-cf/pcf-metrics-trace-example-golang
+./scripts/deploy.sh
 ```
 
 ### CURL APPS
