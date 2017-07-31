@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+	"math/rand"
 )
 
 var (
 	traceIdHeader = "X-B3-TraceId"
 	spanIdHeader  = "X-B3-SpanId"
+	parentSpanIdHeader = "X-B3-ParentSpanId"
 )
 
 type proxyMiddleware struct {
@@ -41,17 +43,20 @@ func (p proxyMiddleware) proxy(proxyReq *http.Request) error {
 	time.Sleep(time.Duration(500) * time.Millisecond)
 
 	req, err := http.NewRequest("GET", fmt.Sprintf("http://%s/%s", p.targetUrl, p.path), nil)
-
 	if err != nil {
 		fmt.Printf("Cannot create proxy request %s", err.Error())
 		return err
 	}
 
 	traceId := proxyReq.Header.Get(traceIdHeader)
-	spanId := proxyReq.Header.Get(spanIdHeader)
+	previousSpanId := proxyReq.Header.Get(spanIdHeader)
 
 	req.Header.Add(traceIdHeader, traceId)
-	req.Header.Add(spanIdHeader, spanId)
+	req.Header.Add(parentSpanIdHeader, previousSpanId)
+
+	s1 := rand.NewSource(time.Now().UnixNano())
+	r1 := rand.New(s1)
+	req.Header.Add(spanIdHeader, fmt.Sprintf("%x", r1.Uint64()))
 
 	client := &http.Client{
 		Timeout: time.Duration(30 * time.Second),
